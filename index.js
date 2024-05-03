@@ -27,7 +27,7 @@ app.get('/api/hello', function(req, res) {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect("mongodb+srv://favianwardhana1993:2NE1uGidwJEYyUsS@fcc-moongose-tutorial.pr5sbrf.mongodb.net/?retryWrites=true&w=majority&appName=fcc-moongose-tutorial", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
@@ -44,8 +44,12 @@ app.post('/api/shorturl', async (req, res) => {
 
   await Url.create({ original_url, short_url });
 
-  res.json({ original_url, short_url });
+  res.json({
+    "original_url": original_url,
+    "short_url": short_url
+  });
 });
+
 
 app.get('/api/shorturl/:short_url', async (req, res) => {
   const { short_url } = req.params;
